@@ -58,7 +58,6 @@ public class BJ_P14503_로봇청소기 {
 			cnt++;
 		}
 		
-		
 		//주변 4칸 상태 확인
 		boolean ch_cur = false;
 		for(int i=0; i<4; i++) {
@@ -77,6 +76,7 @@ public class BJ_P14503_로봇청소기 {
 	
 	//청소 가능 칸 있는 경우
 	private static void cl(int r, int c, int d) {
+
 		while(true) {
 			//방향 회전 
 			d = (d+3)%4;
