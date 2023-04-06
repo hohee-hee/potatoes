@@ -53,8 +53,10 @@ public class BJ_P14503_로봇청소기 {
 	
 	private static void f(int r, int c, int d) {
 		//현재 칸 청소
-		ch[r][c]=true;
-		cnt++;
+		if(!ch[r][c]) {
+			ch[r][c]=true;
+			cnt++;
+		}
 		
 		//주변 4칸 상태 확인
 		boolean ch_cur = false;
@@ -74,13 +76,17 @@ public class BJ_P14503_로봇청소기 {
 	
 	//청소 가능 칸 있는 경우
 	private static void cl(int r, int c, int d) {
-		//방향 회전 
-		d = (d+3)%4;
-		//앞쪽 청소  가능 전진
-		int x = r+dx[d];
-		int y = c+dy[d];
-		if(map[x][y]==0 && !ch[x][y]) {
-			f(x, y, d);
+
+		while(true) {
+			//방향 회전 
+			d = (d+3)%4;
+			//앞쪽 청소  가능 전진
+			int x = r+dx[d];
+			int y = c+dy[d];
+			if(map[x][y]==0 && !ch[x][y]) {
+				f(x, y, d);
+				break;
+			}
 		}
 	}
 	
@@ -90,10 +96,8 @@ public class BJ_P14503_로봇청소기 {
 		int x = r+dx[(d+2)%4];
 		int y = c+dy[(d+2)%4];
 		//후진하기 가능
-		if(map[x][y]==0) {
-			r = x;
-			c = y;
-			f(r, c, d);
+		if(x>=0 && y>=0 && x<n && y<m && map[x][y]==0) {
+			f(x, y, d);
 		}else {
 			//후진 불가능 종료
 			return;
